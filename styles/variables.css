@@ -1,4 +1,8 @@
 * {
+  /* Global */
+  --mobile-view-breakpoint: 767px;
+  --tablet-view-breakpoint: 1023px;
+
   /* Navbar */
   --nav-default-text-color: #191816;
   --nav-hover-text-color: #0a0a0a;

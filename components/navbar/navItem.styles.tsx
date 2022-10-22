@@ -31,8 +31,9 @@ export const StyledButton = styled.button`
   color: var(--nav-default-text-color);
   background-color: inherit;
   font-weight: bold;
-  @media (min-width: 600px) {
-    min-height: 64px;
+  min-height: 4rem;
+  @media (max-width: var(--mobile-view-breakpoint)) {
+    min-height: unset;
   }
 `
 
