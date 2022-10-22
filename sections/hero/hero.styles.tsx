@@ -1,5 +1,6 @@
 import styled from '@emotion/styled'
 export const SectionWrapper = styled.div`
+  padding: 1.5rem;
   position: relative;
   display: flex;
   align-items: center;
@@ -12,7 +13,6 @@ export const SectionWrapper = styled.div`
 
 export const SectionInnerWrapper = styled.div`
   max-width: 1440px;
-  padding: 1.5rem;
   margin: 0 auto;
   z-index: 1;
 `
