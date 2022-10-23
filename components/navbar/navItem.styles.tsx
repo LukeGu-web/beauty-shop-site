@@ -32,7 +32,7 @@ export const StyledButton = styled.button`
   background-color: inherit;
   font-weight: bold;
   min-height: 4rem;
-  @media (max-width: var(--mobile-view-breakpoint)) {
+  @media (max-width: 767px) {
     min-height: unset;
   }
 `

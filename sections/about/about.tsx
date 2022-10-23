@@ -1,19 +1,20 @@
 import styled from '@emotion/styled'
 import { OutlinedButton } from 'components/button/button'
 import dynamic from 'next/dynamic'
+import { InnerWrapper, Wrapper } from 'sections/general.styles'
 const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false })
 
-export const SectionWrapper = styled.div`
+export const SectionWrapper = styled(Wrapper)`
   background-color: #fff5f0;
-  padding: 1.5rem;
 `
 
-export const SectionInnerWrapper = styled.div`
-  max-width: 1440px;
+export const SectionInnerWrapper = styled(InnerWrapper)`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 1fr;
   grid-column-gap: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 `
 
 export const ContentWrapper = styled.div``

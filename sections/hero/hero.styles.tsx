@@ -1,40 +1,32 @@
 import styled from '@emotion/styled'
-export const SectionWrapper = styled.div`
-  padding: 1.5rem;
+import { InnerWrapper, Wrapper } from 'sections/general.styles'
+
+export const SectionWrapper = styled(Wrapper)`
   position: relative;
   display: flex;
   align-items: center;
   min-height: 550px;
   background-color: #c1a19a;
-  @media (max-width: var(--tablet-view-breakpoint)) {
+  @media (max-width: 1023px) {
     min-height: 480px;
   }
 `
 
-export const SectionInnerWrapper = styled.div`
-  max-width: 1440px;
-  margin: 0 auto;
+export const SectionInnerWrapper = styled(InnerWrapper)`
   z-index: 1;
 `
 
 export const ContentWrapper = styled.div`
   width: calc(66.6% - 2rem);
-  @media (max-width: var(--tablet-view-breakpoint)) {
+  @media (max-width: 1023px) {
     width: calc(100% - 2rem);
   }
 `
 
 export const ContentTitle = styled.h1`
-  font-weight: normal;
-  font-size: 4rem;
-  letter-spacing: -1px;
-  line-height: 1;
   & > span {
     text-decoration: underline;
     font-style: italic;
-  }
-  @media (max-width: var(--tablet-view-breakpoint)) {
-    font-size: 2rem;
   }
 `
 
