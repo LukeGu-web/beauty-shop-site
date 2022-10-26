@@ -5,6 +5,7 @@ import Tab from '@mui/material/Tab'
 import { InnerWrapper, Wrapper } from 'sections/general.styles'
 import { TabPanel, a11yProps } from './tabPanel'
 import { tabsData } from './tabsData'
+import { TreatmentArea } from './treatmentArea'
 
 export const SectionWrapper = styled(Wrapper)`
   background-color: #fff5f0;
@@ -18,10 +19,6 @@ export const TabWrapper = styled.div`
 `
 
 export const Title = styled.h2``
-
-export const ContentDescription = styled.p``
-
-export const VideoWrapper = styled.div``
 
 export function HowItWorks() {
   const [selectedId, setValue] = useState(0)
@@ -62,6 +59,7 @@ export function HowItWorks() {
             />
           ))}
         </TabWrapper>
+        <TreatmentArea />
       </SectionInnerWrapper>
     </SectionWrapper>
   )
