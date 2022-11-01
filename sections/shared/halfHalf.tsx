@@ -42,7 +42,6 @@ export function HalfHalf({
   videoSrc,
   imageSrc,
 }: halfHalfProps) {
-  console.log(segmentText('A \n B'))
   return (
     <SectionInnerWrapper>
       <ContentWrapper>
@@ -59,7 +58,7 @@ export function HalfHalf({
           />
         )}
         {imageSrc && (
-          <Image alt={title} width={280} height={180} src={imageSrc} />
+          <Image alt={title} width={688} height={459} src={imageSrc} />
         )}
       </MediaWrapper>
     </SectionInnerWrapper>

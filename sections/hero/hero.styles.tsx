@@ -43,4 +43,5 @@ export const ImageWrapper = styled.div`
   position: absolute;
   right: 0;
   height: 100%;
+  overflow: hidden;
 `

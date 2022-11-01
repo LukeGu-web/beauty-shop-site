@@ -1,7 +1,9 @@
 import styled from '@emotion/styled'
 import { ContainedButton } from 'components/button/button'
 import { InnerWrapper, Wrapper } from 'sections/shared/shared.styles'
+import { HalfHalf } from 'sections/shared/halfHalf'
 import { ImageCarousel } from './imageCarousel'
+import { resultData } from './resultData'
 
 const SectionWrapper = styled(Wrapper)`
   background-color: #fff5f0;
@@ -43,6 +45,7 @@ export function Result() {
           <ContainedButton>See more results</ContainedButton>
         </ButtonWrapper>
       </SectionInnerWrapper>
+      <HalfHalf {...resultData} />
     </SectionWrapper>
   )
 }

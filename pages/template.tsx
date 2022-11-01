@@ -5,6 +5,7 @@ import { Benefit } from 'sections/benefit/benefit'
 import { Hero } from 'sections/hero/hero'
 import { HowItWorks } from 'sections/howItWorks/howItWorks'
 import { Price } from 'sections/price/price'
+import { Result } from 'sections/result/result'
 
 const Home: NextPage = () => {
   return (
@@ -14,6 +15,7 @@ const Home: NextPage = () => {
       <Benefit />
       <HowItWorks />
       <Price />
+      <Result />
       <p>this is template page</p>
     </PageLayout>
   )
