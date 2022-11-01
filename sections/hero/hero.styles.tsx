@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { InnerWrapper, Wrapper } from 'sections/general.styles'
+import { InnerWrapper, Wrapper } from 'sections/shared/shared.styles'
 
 export const SectionWrapper = styled(Wrapper)`
   position: relative;

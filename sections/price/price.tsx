@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import { ContainedButton } from 'components/button/button'
-import { InnerWrapper, Wrapper } from 'sections/general.styles'
+import { InnerWrapper, Wrapper } from 'sections/shared/shared.styles'
 
 const SectionWrapper = styled(Wrapper)`
   background-color: #82635b;

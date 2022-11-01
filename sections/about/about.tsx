@@ -1,7 +1,9 @@
 import styled from '@emotion/styled'
 import { OutlinedButton } from 'components/button/button'
 import dynamic from 'next/dynamic'
-import { InnerWrapper, Wrapper } from 'sections/general.styles'
+import { HalfHalf } from 'sections/shared/halfHalf'
+import { InnerWrapper, Wrapper } from 'sections/shared/shared.styles'
+import { aboutData } from './aboutData'
 const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false })
 
 export const SectionWrapper = styled(Wrapper)`
@@ -28,31 +30,7 @@ export const VideoWrapper = styled.div``
 export function About() {
   return (
     <SectionWrapper>
-      <SectionInnerWrapper>
-        <ContentWrapper>
-          <ContentTitle>Anti-Wrinkle vs. Dermal Filler</ContentTitle>
-          <ContentDescription>
-            What are Anti-Wrinkle and Dermal Filler Cosmetic Injectable
-            treatments and what can they do for you? Our Global Medical Director
-            Dr. Jonathan Hopkirk explains the difference between the two, the
-            benefits of each, and the common treatment areas.
-            <br />
-            <br />
-            Laser Clinics is the largest aesthetic clinic company globally and
-            our Medical Team of Doctors and Registered Nurses will provide a
-            tailored treatment plan to you. With over 200 clinics globally, we
-            deliver more treatments and the best results.
-          </ContentDescription>
-          <OutlinedButton>BOOK A COMPLIMENTARY CONSULTATION</OutlinedButton>
-        </ContentWrapper>
-        <VideoWrapper>
-          <ReactPlayer
-            url="https://www.youtube.com/watch?v=RWr8XeBUxTU"
-            controls
-            width="100%"
-          />
-        </VideoWrapper>
-      </SectionInnerWrapper>
+      <HalfHalf {...aboutData} />
     </SectionWrapper>
   )
 }
