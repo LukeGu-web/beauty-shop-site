@@ -12,6 +12,7 @@ const ImageWrapper = styled.div``
 
 const ImageTitle = styled.p`
   padding: 0 1rem;
+  text-align: center;
 `
 
 type ArrowButtonProps = {

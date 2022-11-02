@@ -9,6 +9,8 @@ export const ContentWrapper = styled.div`
 `
 export const Description = styled.p`
   width: 40%;
+  height: 18rem;
+  overflow-y: scroll;
   margin: 0 4rem;
 `
 export const ImageWrapper = styled.div``

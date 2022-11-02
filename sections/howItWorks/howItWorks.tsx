@@ -39,6 +39,7 @@ export function HowItWorks() {
             sx={{
               borderRight: 1,
               borderColor: 'divider',
+              overflow: 'visible',
             }}
           >
             {tabsData.map((item, index) => (
