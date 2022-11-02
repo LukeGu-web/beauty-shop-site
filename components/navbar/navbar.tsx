@@ -1,50 +1,39 @@
 import React from 'react'
-import {
-    AppBar,
-    Toolbar,
-    CssBaseline,
-    Typography,
-} from '@mui/material'
-import styled from '@emotion/styled'
-import Link from 'next/link'
+import { Toolbar } from '@mui/material'
 import NavItem from './navItem'
-
-
-let ItemsWrapper = styled.div({
-    display: "flex",
-    flexWrap: 'wrap'
-})
+import { navData } from './navData'
+import { ItemInnerWrapper, ItemsWrapper } from './navbar.styles'
+import { BlockItem, BlockItemInterface } from './blockItem'
+import { ListItemInterface, ListItems } from './listItem'
 
 function Navbar() {
-
-    return (
-        <AppBar position="static">
-            <CssBaseline />
-            <Toolbar>
-                <Typography variant="h4">Navbar</Typography>
-                <ItemsWrapper>
-                    <NavItem title="test - 1" id={1}>
-                        <Link href="/">Home</Link>
-                        <Link href="/about">About</Link>
-                        <Link href="/contact">contact</Link>
-                        <Link href="/faq">FAQ</Link>
-                    </NavItem>
-                    <NavItem title="test - 2" id={2}>
-                        <Link href="/">Home</Link>
-                        <Link href="/about">About</Link>
-                        <Link href="/contact">contact</Link>
-                        <Link href="/faq">FAQ</Link>
-                    </NavItem>
-                    <NavItem title="test - 3" id={3}>
-                        <Link href="/">Home</Link>
-                        <Link href="/about">About</Link>
-                        <Link href="/contact">contact</Link>
-                        <Link href="/faq">FAQ</Link>
-                    </NavItem>
-
-                </ItemsWrapper>
-            </Toolbar>
-        </AppBar>
-    )
+  return (
+    <Toolbar>
+      <ItemsWrapper>
+        {navData.map((navItem, nIndex) => (
+          <NavItem
+            title={navItem.category}
+            id={nIndex}
+            key={`${navItem.category}_${nIndex}`}
+          >
+            {navItem.items.map((item, iIndex) => (
+              <ItemInnerWrapper
+                borderLeft={item.type === 'list' && iIndex > 0}
+                key={`${item.type}_${iIndex}`}
+              >
+                {item.type === 'list' ? (
+                  <ListItems
+                    listItems={item.listItems as ListItemInterface[]}
+                  />
+                ) : (
+                  <BlockItem blockItem={item.blockItem as BlockItemInterface} />
+                )}
+              </ItemInnerWrapper>
+            ))}
+          </NavItem>
+        ))}
+      </ItemsWrapper>
+    </Toolbar>
+  )
 }
 export default Navbar
