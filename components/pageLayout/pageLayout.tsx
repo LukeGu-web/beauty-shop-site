@@ -1,6 +1,7 @@
 import { ReactNode } from 'react'
 import Head from 'next/head'
 import Header from 'components/header/header'
+import Footer from 'components/footer/footer'
 
 interface PageLayoutInterface {
   title: string
@@ -23,6 +24,7 @@ export function PageLayout({
       <main>
         <Header />
         {children}
+        <Footer />
       </main>
     </div>
   )
