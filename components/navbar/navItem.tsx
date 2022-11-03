@@ -2,16 +2,16 @@ import { ReactNode } from 'react'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { Content, InnerContent, StyledButton, Wrapper } from './navItem.styles'
 interface NavItemInterface {
-  title: string
+  name: string
   id: string | number
   children: ReactNode
 }
 
-function NavItem({ title, id, children }: NavItemInterface) {
+function NavItem({ name, id, children }: NavItemInterface) {
   return (
     <Wrapper key={id}>
       <StyledButton>
-        {title}
+        {name}
         <ExpandMoreIcon />
       </StyledButton>
       <Content>

@@ -3,7 +3,11 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ['www.laserclinics.com.au', 'www.laserclinicsnewzealand.co.nz'],
+    domains: [
+      'cdn.sanity.io',
+      'www.laserclinics.com.au',
+      'www.laserclinicsnewzealand.co.nz',
+    ],
   },
 }
 

@@ -23,9 +23,20 @@ export interface ListItemInterface {
   link: string
 }
 
-export function ListItems({ listItems }: { listItems: ListItemInterface[] }) {
+export function ListItems({
+  listName,
+  listLink,
+  listItems,
+}: {
+  listName: string
+  listLink: string
+  listItems: ListItemInterface[]
+}) {
   return (
     <ListItemsWrapper>
+      <Link href={listLink}>
+        <h3>{listName}</h3>
+      </Link>
       {listItems.map((listItem: ListItemInterface) => (
         <LinkWrapper key={listItem.title}>
           <Link href={listItem.link}>

@@ -17,6 +17,8 @@ const ImageTitle = styled.p`
 
 type ArrowButtonProps = {
   direction: string
+  currentSlide?: number
+  slideCount?: number
 }
 
 const ArrowButton = styled(IconButton)<ArrowButtonProps>`
@@ -42,7 +44,12 @@ function SlideItem({ title, imageSrc }: { title: string; imageSrc: string }) {
   )
 }
 
-function Arrow({ direction, ...props }: { direction: string }) {
+function Arrow({
+  direction,
+  currentSlide,
+  slideCount,
+  ...props
+}: ArrowButtonProps) {
   return (
     <ArrowButton
       {...props}

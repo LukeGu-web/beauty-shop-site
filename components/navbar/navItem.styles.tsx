@@ -15,7 +15,6 @@ export const Content = styled.div`
 export const InnerContent = styled.div`
   display: flex;
   flex-direction: row;
-  width: 90%;
   max-width: 1024px;
   margin: 0 auto;
 `
