@@ -6,6 +6,14 @@ import { ItemInnerWrapper, ItemsWrapper } from './navbar.styles'
 import { BlockItem, BlockItemInterface } from './blockItem'
 import { ListItemInterface, ListItems } from './listItem'
 
+type navItemProps = {
+  listName: string
+  listLink: string
+  isBlockItem: boolean
+  listItems: ListItemInterface[]
+  blockItem: BlockItemInterface
+}
+
 function Navbar() {
   const [navData, setNavData] = useState([])
 
@@ -22,6 +30,7 @@ function Navbar() {
       .then((data) => {
         setNavData(data[0].categories)
       })
+      .catch(console.error)
   }, [])
 
   return (
@@ -38,33 +47,24 @@ function Navbar() {
                 id={nIndex}
                 key={`${navItem.name}_${nIndex}`}
               >
-                {navItem.items.map(
-                  (
-                    item: {
-                      isBlockItem: boolean
-                      listItems: ListItemInterface[]
-                      blockItem: BlockItemInterface
-                    },
-                    iIndex: number,
-                  ) => (
-                    <ItemInnerWrapper
-                      borderLeft={!item.isBlockItem && iIndex > 0}
-                      key={`nav_item_${iIndex}`}
-                    >
-                      {!item.isBlockItem ? (
-                        <ListItems
-                          listName={item.listName}
-                          listLink={item.listLink}
-                          listItems={item.listItems as ListItemInterface[]}
-                        />
-                      ) : (
-                        <BlockItem
-                          blockItem={item.blockItem as BlockItemInterface}
-                        />
-                      )}
-                    </ItemInnerWrapper>
-                  ),
-                )}
+                {navItem.items.map((item: navItemProps, iIndex: number) => (
+                  <ItemInnerWrapper
+                    borderLeft={!item.isBlockItem && iIndex > 0}
+                    key={`nav_item_${iIndex}`}
+                  >
+                    {!item.isBlockItem ? (
+                      <ListItems
+                        listName={item.listName}
+                        listLink={item.listLink}
+                        listItems={item.listItems as ListItemInterface[]}
+                      />
+                    ) : (
+                      <BlockItem
+                        blockItem={item.blockItem as BlockItemInterface}
+                      />
+                    )}
+                  </ItemInnerWrapper>
+                ))}
               </NavItem>
             ),
           )}
