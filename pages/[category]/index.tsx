@@ -11,21 +11,20 @@ import { Price } from 'sections/price/price'
 import { Question } from 'sections/question/question'
 import { Result } from 'sections/result/result'
 
-const getQuery = (product: string) => `
-  *[_type == "product" && slug.current == "${product}"] {
+const getQuery = (category: string) => `
+    *[_type == "category" && slug.current == "${category}"] {
     name,
     slug,
-    category->
-  }
+    }
 `
 
-const ProductTemplate: NextPage = ({ productdata, preview }: any) => {
+const ProductTemplate: NextPage = ({ categorydata, preview }: any) => {
   const router = useRouter()
-  const { category, product } = router.query
+  const { category } = router.query
 
-  const query = getQuery(product as string)
+  const query = getQuery(category as string)
   const { data: pd } = usePreviewSubscription(query, {
-    initialData: productdata,
+    initialData: categorydata,
     enabled: preview || router.query.preview !== undefined,
   })
 
@@ -51,12 +50,12 @@ export async function getServerSideProps({
   params: any
   preview: boolean
 }) {
-  const query = getQuery(params.product as string)
-  const product = await getClient(preview).fetch(query)
+  const query = getQuery(params.category as string)
+  const category = await getClient(preview).fetch(query)
 
   return {
     props: {
-      productdata: product,
+      categorydata: category,
       preview,
     },
   }
