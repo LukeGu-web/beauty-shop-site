@@ -19,7 +19,8 @@ const getQuery = (product: string) => `
     heroSection,
     aboutSection,
     benefitSection,
-    howItWorksSection
+    howItWorksSection,
+    priceSection,
   }
 `
 
@@ -39,7 +40,7 @@ const ProductTemplate: NextPage = ({ productdata, preview }: any) => {
       <About {...pd.aboutSection} />
       <Benefit {...pd.benefitSection} />
       <HowItWorks {...pd.howItWorksSection} />
-      <Price />
+      <Price {...pd.priceSection} />
       <Result />
       <Question />
     </PageLayout>
