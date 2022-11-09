@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import { urlFor } from 'lib/sanity'
 import { ContainedButton, OutlinedButton } from 'components/button/button'
 import {
@@ -8,6 +9,7 @@ import {
   ContentTitle,
   ContentDescription,
   ContentButtonGroup,
+  LinkButtonWrapper,
   ImageWrapper,
 } from './hero.styles'
 
@@ -37,8 +39,16 @@ export function Hero({
           <ContentTitle>{title}</ContentTitle>
           <ContentDescription>{description}</ContentDescription>
           <ContentButtonGroup>
-            <ContainedButton>{leftButtonLabel}</ContainedButton>
-            <OutlinedButton>{rightButtonLabel}</OutlinedButton>
+            <Link href={leftButtonLink || ''}>
+              <LinkButtonWrapper>
+                <ContainedButton>{leftButtonLabel}</ContainedButton>
+              </LinkButtonWrapper>
+            </Link>
+            <Link href={rightButtonLink || ''}>
+              <a>
+                <OutlinedButton>{rightButtonLabel}</OutlinedButton>
+              </a>
+            </Link>
           </ContentButtonGroup>
         </ContentWrapper>
       </SectionInnerWrapper>

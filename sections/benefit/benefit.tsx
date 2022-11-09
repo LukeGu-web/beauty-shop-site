@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import { urlFor } from 'lib/sanity'
 import { InnerWrapper, Wrapper } from 'sections/shared/shared.styles'
 import { benefitData } from './benefitData'
 import { BenefitItem } from './benefitItem'
@@ -24,18 +25,28 @@ export const ContentTitle = styled.h2`
   max-width: 1440px;
   margin: 0 auto;
 `
+type benefitItemProps = {
+  title: string
+  description: string
+  imageSrc: string
+}
 
-export function Benefit() {
+type benefitProps = {
+  title: string
+  items: benefitItemProps[]
+}
+
+export function Benefit({ title, items }: benefitProps) {
   return (
     <SectionWrapper>
-      <ContentTitle>Benefits of Anti Wrinkle Injectables</ContentTitle>
+      <ContentTitle>{title}</ContentTitle>
       <SectionInnerWrapper>
-        {benefitData.map((item) => (
+        {items.map((item) => (
           <BenefitItem
             key={item.title}
             title={item.title}
             description={item.description}
-            image={item.image}
+            image={urlFor(item.imageSrc).url()}
           />
         ))}
       </SectionInnerWrapper>

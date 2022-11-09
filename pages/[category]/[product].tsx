@@ -17,6 +17,8 @@ const getQuery = (product: string) => `
     slug,
     category->,
     heroSection,
+    aboutSection,
+    benefitSection,
   }
 `
 
@@ -33,10 +35,10 @@ const ProductTemplate: NextPage = ({ productdata, preview }: any) => {
   console.log('pd: ', pd)
 
   return (
-    <PageLayout title="template" metaDescription="this is template page">
+    <PageLayout title={pd.name} metaDescription="this is template page">
       <Hero {...pd.heroSection} />
-      <About />
-      <Benefit />
+      <About {...pd.aboutSection} />
+      <Benefit {...pd.benefitSection} />
       <HowItWorks />
       <Price />
       <Result />
