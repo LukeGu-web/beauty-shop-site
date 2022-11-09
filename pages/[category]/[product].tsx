@@ -32,8 +32,6 @@ const ProductTemplate: NextPage = ({ productdata, preview }: any) => {
     enabled: preview || router.query.preview !== undefined,
   })
 
-  console.log('pd: ', pd)
-
   return (
     <PageLayout title={pd.name} metaDescription="this is template page">
       <Hero {...pd.heroSection} />

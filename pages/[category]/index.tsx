@@ -28,17 +28,16 @@ const ProductTemplate: NextPage = ({ categorydata, preview }: any) => {
     enabled: preview || router.query.preview !== undefined,
   })
 
-  console.log('pd: ', pd)
-
   return (
     <PageLayout title="template" metaDescription="this is template page">
-      <Hero />
+      category page
+      {/* <Hero />
       <About />
       <Benefit />
       <HowItWorks />
       <Price />
       <Result />
-      <Question />
+      <Question /> */}
     </PageLayout>
   )
 }

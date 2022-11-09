@@ -58,8 +58,6 @@ function Navbar() {
       .catch(console.error)
   }, [])
 
-  console.log('navData: ', navData)
-
   return (
     <Toolbar>
       {navData.length > 0 && (
