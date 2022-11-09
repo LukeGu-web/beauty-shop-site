@@ -21,7 +21,7 @@ const TitleLink = styled(Typography)`
 `
 
 export interface BlockItemInterface {
-  title: string
+  name: string
   imageSrc: string
   link: string
 }
@@ -31,12 +31,12 @@ export function BlockItem({ blockItem }: { blockItem: BlockItemInterface }) {
     <Link href={blockItem?.link || '/'}>
       <LinkWrapper>
         <Image
-          alt={blockItem?.title}
+          alt={blockItem?.name}
           width={280}
           height={180}
           src={urlFor(blockItem.imageSrc).url()}
         />
-        <TitleLink>{blockItem.title}</TitleLink>
+        <TitleLink>{blockItem.name}</TitleLink>
       </LinkWrapper>
     </Link>
   )

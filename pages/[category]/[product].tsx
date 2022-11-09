@@ -12,10 +12,11 @@ import { Question } from 'sections/question/question'
 import { Result } from 'sections/result/result'
 
 const getQuery = (product: string) => `
-  *[_type == "product" && slug.current == "${product}"] {
+  *[_type == "product" && slug.current == "/${product}"] {
     name,
     slug,
-    category->
+    category->,
+    heroSection,
   }
 `
 
@@ -25,7 +26,7 @@ const ProductTemplate: NextPage = ({ productdata, preview }: any) => {
 
   const query = getQuery(product as string)
   const { data: pd } = usePreviewSubscription(query, {
-    initialData: productdata,
+    initialData: productdata[0],
     enabled: preview || router.query.preview !== undefined,
   })
 
@@ -33,7 +34,7 @@ const ProductTemplate: NextPage = ({ productdata, preview }: any) => {
 
   return (
     <PageLayout title="template" metaDescription="this is template page">
-      <Hero />
+      <Hero {...pd.heroSection} />
       <About />
       <Benefit />
       <HowItWorks />

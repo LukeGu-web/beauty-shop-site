@@ -5,13 +5,45 @@ import NavItem from './navItem'
 import { ItemInnerWrapper, ItemsWrapper } from './navbar.styles'
 import { BlockItem, BlockItemInterface } from './blockItem'
 import { ListItemInterface, ListItems } from './listItem'
+import { groq } from 'next-sanity'
 
 type navItemProps = {
+  isBlockItem: boolean
+  blockItem: BlockItemInterface
   listName: string
   listLink: string
-  isBlockItem: boolean
   listItems: ListItemInterface[]
-  blockItem: BlockItemInterface
+}
+
+const query = `
+  *[_type == "navbar"] {
+      name,
+      sections[]->{
+        category->{
+        name,
+        'link':slug.current
+      },
+      items[]{
+        isBlockItem,
+        blockItem{
+          imageSrc,
+          'name':product->.name,
+          'link': product->.category->.slug.current + product->.slug.current
+        },
+        listName,
+        'listLink': listLink->.category->.slug.current + listLink->.slug.current,
+        listItems[]{
+          name,
+          'link': product->.category->.slug.current + product->.slug.current,
+        }
+      }
+    }
+  }
+`
+
+type navbarSectionProps = {
+  category: { name: string; link: string }
+  items: any[]
 }
 
 function Navbar() {
@@ -19,55 +51,45 @@ function Navbar() {
 
   useEffect(() => {
     client
-      .fetch(
-        `*[_type == "navbar"] {
-      ..., 
-      name->,
-      categories[]->
-    }
-    `,
-      )
+      .fetch(query)
       .then((data) => {
-        setNavData(data[0].categories)
+        setNavData(data[0].sections)
       })
       .catch(console.error)
   }, [])
+
+  console.log('navData: ', navData)
 
   return (
     <Toolbar>
       {navData.length > 0 && (
         <ItemsWrapper>
-          {navData.map(
-            (
-              navItem: { name: string; items: any[] },
-              nIndex: string | number,
-            ) => (
-              <NavItem
-                name={navItem.name}
-                id={nIndex}
-                key={`${navItem.name}_${nIndex}`}
-              >
-                {navItem.items.map((item: navItemProps, iIndex: number) => (
-                  <ItemInnerWrapper
-                    borderLeft={!item.isBlockItem && iIndex > 0}
-                    key={`nav_item_${iIndex}`}
-                  >
-                    {!item.isBlockItem ? (
-                      <ListItems
-                        listName={item.listName}
-                        listLink={item.listLink}
-                        listItems={item.listItems as ListItemInterface[]}
-                      />
-                    ) : (
-                      <BlockItem
-                        blockItem={item.blockItem as BlockItemInterface}
-                      />
-                    )}
-                  </ItemInnerWrapper>
-                ))}
-              </NavItem>
-            ),
-          )}
+          {navData.map((navItem: navbarSectionProps, nIndex: number) => (
+            <NavItem
+              name={navItem.category.name}
+              id={nIndex}
+              key={`${navItem.category.name}_${nIndex}`}
+            >
+              {navItem.items.map((item: navItemProps, iIndex: number) => (
+                <ItemInnerWrapper
+                  borderLeft={!item.isBlockItem && iIndex > 0}
+                  key={`nav_item_${iIndex}`}
+                >
+                  {!item.isBlockItem ? (
+                    <ListItems
+                      listName={item.listName}
+                      listLink={item.listLink}
+                      listItems={item.listItems as ListItemInterface[]}
+                    />
+                  ) : (
+                    <BlockItem
+                      blockItem={item.blockItem as BlockItemInterface}
+                    />
+                  )}
+                </ItemInnerWrapper>
+              ))}
+            </NavItem>
+          ))}
         </ItemsWrapper>
       )}
     </Toolbar>
