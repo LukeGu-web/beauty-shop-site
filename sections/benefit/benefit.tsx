@@ -1,7 +1,6 @@
 import styled from '@emotion/styled'
 import { urlFor } from 'lib/sanity'
 import { InnerWrapper, Wrapper } from 'sections/shared/shared.styles'
-import { benefitData } from './benefitData'
 import { BenefitItem } from './benefitItem'
 export const SectionWrapper = styled(Wrapper)``
 
