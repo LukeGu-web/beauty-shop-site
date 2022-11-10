@@ -1,10 +1,12 @@
 import styled from '@emotion/styled'
 import dynamic from 'next/dynamic'
+import Link from 'next/link'
 import Image from 'next/image'
 
 import { OutlinedButton } from 'components/button/button'
 import { InnerWrapper } from 'sections/shared/shared.styles'
-import { segmentText } from './utility'
+import { urlFor } from 'lib/sanity'
+import { segmentText } from 'utils/segmentText'
 
 const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false })
 
@@ -27,18 +29,26 @@ const ContentDescription = styled.p`
 
 const MediaWrapper = styled.div``
 
-type halfHalfProps = {
+export type halfHalfProps = {
   title: string
   description: string
   buttonLabel: string
+  buttonLink: string
   videoSrc?: string
-  imageSrc?: string
+  imageSrc?: {
+    _type: string
+    asset: {
+      _ref: string
+      _type: string
+    }
+  }
 }
 
 export function HalfHalf({
   title,
   description,
   buttonLabel,
+  buttonLink,
   videoSrc,
   imageSrc,
 }: halfHalfProps) {
@@ -47,7 +57,11 @@ export function HalfHalf({
       <ContentWrapper>
         <ContentTitle>{title}</ContentTitle>
         <ContentDescription>{segmentText(description)}</ContentDescription>
-        <OutlinedButton>{buttonLabel}</OutlinedButton>
+        <Link href={buttonLink || ''}>
+          <a>
+            <OutlinedButton>{buttonLabel}</OutlinedButton>
+          </a>
+        </Link>
       </ContentWrapper>
       <MediaWrapper>
         {videoSrc && (
@@ -57,8 +71,13 @@ export function HalfHalf({
             width="100%"
           />
         )}
-        {imageSrc && (
-          <Image alt={title} width={688} height={459} src={imageSrc} />
+        {Boolean(imageSrc) && (
+          <Image
+            alt={title}
+            width={688}
+            height={459}
+            src={urlFor(imageSrc).url()}
+          />
         )}
       </MediaWrapper>
     </SectionInnerWrapper>

@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import Link from 'next/link'
 import { ContainedButton } from 'components/button/button'
 import { InnerWrapper, Wrapper } from 'sections/shared/shared.styles'
 
@@ -31,6 +32,7 @@ const ListTitle = styled.h6`
   color: #ddc6af;
   border-bottom: 2px solid;
   padding: 0.5rem 0;
+  text-transform: uppercase;
 `
 
 const ListItem = styled.li`
@@ -41,48 +43,57 @@ const ListItem = styled.li`
   padding: 0.5rem 0;
 `
 
-export function Price() {
+type priceType = {
+  name: string
+  cost: string
+}
+
+type priceListProps = {
+  name: string
+  prices: priceType[]
+}
+
+type priceProps = {
+  content: {
+    title: string
+    description: string
+    buttonLabel: string
+    buttonLink: string
+  }
+  lists: priceListProps[]
+}
+
+function PriceList({ name, prices }: priceListProps) {
+  return (
+    <div>
+      <ListTitle>{name}</ListTitle>
+      {prices.map((item) => (
+        <ListItem key={item.name}>
+          <span>{item.name}</span>
+          <span>{item.cost}</span>
+        </ListItem>
+      ))}
+    </div>
+  )
+}
+
+export function Price({ content, lists }: priceProps) {
   return (
     <SectionWrapper>
       <SectionInnerWrapper>
         <ContentWrapper>
-          <ContentTitle>
-            Our Anti-Wrinkle Injectables prices and packages
-          </ContentTitle>
-          <ContentDescription>
-            We recommend a complimentary consultation with one of our Registered
-            Nurses or Doctors to advise you on the appropriate product and
-            pricing based on your tailored needs.
-          </ContentDescription>
-          <ContainedButton>BOOK A FREE CONSULTATION</ContainedButton>
+          <ContentTitle>{content.title}</ContentTitle>
+          <ContentDescription>{content.description}</ContentDescription>
+          <Link href={content.buttonLink || ''}>
+            <a>
+              <ContainedButton>{content.buttonLabel}</ContainedButton>
+            </a>
+          </Link>
         </ContentWrapper>
         <div>
-          <ListTitle>ANTI-WRINKLE SINGLE UNITS</ListTitle>
-          <List>
-            <ListItem>
-              <span>0-32 units</span>
-              <span>$11.99 per unit</span>
-            </ListItem>
-            <ListItem>
-              <span>33+ units</span>
-              <span>$9.99 per unit</span>
-            </ListItem>
-          </List>
-          <ListTitle>ANTI-WRINKLE PACKAGES</ListTitle>
-          <List>
-            <ListItem>
-              <span>Wrinkle Treatment (2 areas)</span>
-              <span>$369</span>
-            </ListItem>
-            <ListItem>
-              <span>Wrinkle Treatment (3 areas)</span>
-              <span>$529</span>
-            </ListItem>
-            <ListItem>
-              <span>Wrinkle Treatment & Dermal Fillers</span>
-              <span>$690 / $849 / $990</span>
-            </ListItem>
-          </List>
+          {lists.map((item) => (
+            <PriceList key={item.name} {...item} />
+          ))}
         </div>
       </SectionInnerWrapper>
     </SectionWrapper>

@@ -1,15 +1,16 @@
 import styled from '@emotion/styled'
 import Image from 'next/image'
+import { urlFor } from 'lib/sanity'
 
-export const Wrapper = styled.div``
+const Wrapper = styled.div``
 
-export const Title = styled.h3`
+const Title = styled.h3`
   text-align: center;
   margin-top: 2rem;
   margin-bottom: 2rem;
 `
 
-export const InnerWrapper = styled.div`
+const InnerWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 1fr;
@@ -17,41 +18,49 @@ export const InnerWrapper = styled.div`
   padding: 5%;
 `
 
-export const ContentWrapper = styled.div`
+const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
 `
 
-export const ImageWrapper = styled.div`
+const ImageWrapper = styled.div`
   display: flex;
   justify-content: center;
 `
 
-export const ContentDescription = styled.p``
+const ContentDescription = styled.p``
 
-export function TreatmentArea() {
+export type treatmentAreasProps = {
+  areaTitle: string
+  contentTitle: string
+  description: string
+  imageSrc: string
+}
+
+export function TreatmentArea({
+  areaTitle,
+  contentTitle,
+  description,
+  imageSrc,
+}: treatmentAreasProps) {
   return (
-    <div>
-      <Title>Wrinkle Treatment Areas</Title>
+    <Wrapper>
+      <Title>{areaTitle}</Title>
       <InnerWrapper>
         <ContentWrapper>
-          <h4>Brow Lift</h4>
-          <p>
-            Your brows can sometimes appear uneven or asymmetrical. Muscle
-            relaxing anti-wrinkle injections can increase facial symmetry and in
-            certain cases provide a brow lift.
-          </p>
+          <h4>{contentTitle}</h4>
+          <ContentDescription>{description}</ContentDescription>
         </ContentWrapper>
         <ImageWrapper>
           <Image
             alt="treatment area image"
             width={480}
             height={695}
-            src="https://www.laserclinics.com.au/globalassets/feature/image-maps/wrinkle-image-map3.png"
+            src={urlFor(imageSrc).url()}
           />
         </ImageWrapper>
       </InnerWrapper>
-    </div>
+    </Wrapper>
   )
 }

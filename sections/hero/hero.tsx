@@ -1,4 +1,6 @@
 import Image from 'next/image'
+import Link from 'next/link'
+import { urlFor } from 'lib/sanity'
 import { ContainedButton, OutlinedButton } from 'components/button/button'
 import {
   SectionWrapper,
@@ -7,28 +9,46 @@ import {
   ContentTitle,
   ContentDescription,
   ContentButtonGroup,
+  LinkButtonWrapper,
   ImageWrapper,
 } from './hero.styles'
 
-export function Hero() {
+type heroProps = {
+  title: string
+  description: string
+  imageSrc: string
+  leftButtonLabel: string
+  leftButtonLink: string
+  rightButtonLabel: string
+  rightButtonLink: string
+}
+
+export function Hero({
+  title,
+  description,
+  imageSrc,
+  leftButtonLabel,
+  leftButtonLink,
+  rightButtonLabel,
+  rightButtonLink,
+}: heroProps) {
   return (
     <SectionWrapper>
       <SectionInnerWrapper>
         <ContentWrapper>
-          <ContentTitle>
-            Anti-Wrinkle treatments&nbsp;
-            <span>tailored</span>&nbsp;to you
-          </ContentTitle>
-          <ContentDescription>
-            Performed by our experienced Medical Team of Doctors and Registered
-            Nurses, Anti-Wrinkle Cosmetic Injectables are a non-invasive, quick,
-            affordable, and effective way to help reduce and prevent wrinkle
-            formation that provides natural-looking results, creating a
-            refreshed and youthful look.
-          </ContentDescription>
+          <ContentTitle>{title}</ContentTitle>
+          <ContentDescription>{description}</ContentDescription>
           <ContentButtonGroup>
-            <ContainedButton>BOOK A FREE CONSULTATION</ContainedButton>
-            <OutlinedButton>SEE PRICES & PACKAGES</OutlinedButton>
+            <Link href={leftButtonLink || ''}>
+              <LinkButtonWrapper>
+                <ContainedButton>{leftButtonLabel}</ContainedButton>
+              </LinkButtonWrapper>
+            </Link>
+            <Link href={rightButtonLink || ''}>
+              <a>
+                <OutlinedButton>{rightButtonLabel}</OutlinedButton>
+              </a>
+            </Link>
           </ContentButtonGroup>
         </ContentWrapper>
       </SectionInnerWrapper>
@@ -38,9 +58,7 @@ export function Hero() {
           width={733}
           height={550}
           layout="intrinsic"
-          src={
-            'https://www.laserclinics.com.au/contentassets/20f662848d374a3f85cf9244f8d6b583/v2-aw-category-banner-c1a19a.png?width=800&height=600&anchor=Right&mode=crop'
-          }
+          src={urlFor(imageSrc).url()}
         />
       </ImageWrapper>
     </SectionWrapper>

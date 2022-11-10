@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Typography } from '@mui/material'
 import styled from '@emotion/styled'
+import { urlFor } from 'lib/sanity'
 
 const LinkWrapper = styled.div`
   display: flex;
@@ -20,8 +21,8 @@ const TitleLink = styled(Typography)`
 `
 
 export interface BlockItemInterface {
-  title: string
-  image: string
+  name: string
+  imageSrc: string
   link: string
 }
 
@@ -30,12 +31,12 @@ export function BlockItem({ blockItem }: { blockItem: BlockItemInterface }) {
     <Link href={blockItem?.link || '/'}>
       <LinkWrapper>
         <Image
-          alt={blockItem?.title}
+          alt={blockItem?.name}
           width={280}
           height={180}
-          src={blockItem.image || ''}
+          src={urlFor(blockItem.imageSrc).url()}
         />
-        <TitleLink>{blockItem.title}</TitleLink>
+        <TitleLink>{blockItem.name}</TitleLink>
       </LinkWrapper>
     </Link>
   )

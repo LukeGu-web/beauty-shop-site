@@ -33,10 +33,11 @@ export const ContentTitle = styled.h1`
 export const ContentDescription = styled.p``
 
 export const ContentButtonGroup = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 1fr;
-  grid-column-gap: 1rem;
+  display: flex;
+`
+
+export const LinkButtonWrapper = styled.a`
+  margin-right: 1rem;
 `
 
 export const ImageWrapper = styled.div`
