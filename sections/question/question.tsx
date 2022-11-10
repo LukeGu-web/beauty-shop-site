@@ -4,7 +4,7 @@ import Collapse from '@mui/material/Collapse'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle'
 import { InnerWrapper, Wrapper } from 'sections/shared/shared.styles'
-import { questionData } from './questionData'
+import { segmentText } from 'utils/segmentText'
 
 const SectionWrapper = styled(Wrapper)`
   background-color: #ffebdc;
@@ -30,7 +30,9 @@ const FAQ = styled.button`
   cursor: pointer;
 `
 
-const FAQAnswer = styled.p``
+const FAQAnswer = styled.p`
+  white-space: pre-line;
+`
 
 type QuestionItemProps = {
   question: string
@@ -49,21 +51,22 @@ function QuestionItem({ question, answer }: QuestionItemProps) {
         {open ? <RemoveCircleIcon /> : <AddCircleOutlineIcon />}
       </FAQ>
       <Collapse in={open} timeout="auto" unmountOnExit>
-        <FAQAnswer>{answer}</FAQAnswer>
+        <FAQAnswer>{segmentText(answer)}</FAQAnswer>
       </Collapse>
     </FAQWrapper>
   )
 }
 
-export function Question() {
+export function Question({ questions }: { questions: QuestionItemProps[] }) {
   return (
     <SectionWrapper>
       <SectionInnerWrapper>
         <Title>Frequently Asked Questions</Title>
         <ul style={{ padding: 0 }}>
-          {questionData.map((item, index) => (
-            <QuestionItem key={index} {...item} />
-          ))}
+          {questions.length > 0 &&
+            questions.map((item, index) => (
+              <QuestionItem key={index} {...item} />
+            ))}
         </ul>
       </SectionInnerWrapper>
     </SectionWrapper>

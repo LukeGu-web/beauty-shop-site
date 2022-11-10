@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { OutlinedButton } from 'components/button/button'
 import { InnerWrapper } from 'sections/shared/shared.styles'
 import { urlFor } from 'lib/sanity'
-import { segmentText } from './utility'
+import { segmentText } from 'utils/segmentText'
 
 const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false })
 
