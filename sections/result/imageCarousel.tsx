@@ -1,14 +1,25 @@
 import Slider from 'react-slick'
 import styled from '@emotion/styled'
 import Image from 'next/image'
+import Link from 'next/link'
 import IconButton from '@mui/material/IconButton'
 import WestIcon from '@mui/icons-material/West'
 import EastIcon from '@mui/icons-material/East'
-import { slidesData } from './slidesData'
+import { urlFor } from 'lib/sanity'
 
 const SlideWrapper = styled.div``
 
-const ImageWrapper = styled.div``
+const ImageWrapper = styled.div`
+  background-color: #ddbfaf;
+  padding: 0.5rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  &:hover {
+    img {
+      transform: scale(1.1);
+    }
+  }
+`
 
 const ImageTitle = styled.p`
   padding: 0 1rem;
@@ -33,17 +44,6 @@ const StyledSlider = styled(Slider)`
   padding-top: 2rem;
 `
 
-function SlideItem({ title, imageSrc }: { title: string; imageSrc: string }) {
-  return (
-    <SlideWrapper>
-      <ImageWrapper>
-        <Image alt={title} width={430} height={430} src={imageSrc} />
-      </ImageWrapper>
-      <ImageTitle>{title}</ImageTitle>
-    </SlideWrapper>
-  )
-}
-
 function Arrow({
   direction,
   currentSlide,
@@ -62,7 +62,39 @@ function Arrow({
   )
 }
 
-export function ImageCarousel() {
+export type slideProp = {
+  name: string
+  link: string
+  imageSrc: {
+    _type: string
+    asset: {
+      _ref: string
+      _type: string
+    }
+  }
+}
+
+function SlideItem({ name, link, imageSrc }: slideProp) {
+  return (
+    <SlideWrapper>
+      <Link href={link || ''}>
+        <a>
+          <ImageWrapper>
+            <Image
+              alt={name}
+              width={430}
+              height={430}
+              src={urlFor(imageSrc).url()}
+            />
+          </ImageWrapper>
+          <ImageTitle>{name}</ImageTitle>
+        </a>
+      </Link>
+    </SlideWrapper>
+  )
+}
+
+export function ImageCarousel({ slides }: { slides: slideProp[] }) {
   const settings = {
     dots: false,
     infinite: true,
@@ -74,9 +106,10 @@ export function ImageCarousel() {
   }
   return (
     <StyledSlider {...settings}>
-      {slidesData.map((item, index) => (
-        <SlideItem key={`${item.title}-${index}`} {...item} />
-      ))}
+      {slides.length > 0 &&
+        slides.map((item, index) => (
+          <SlideItem key={`${item.name}-${index}`} {...item} />
+        ))}
     </StyledSlider>
   )
 }

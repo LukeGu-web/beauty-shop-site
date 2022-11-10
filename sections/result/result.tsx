@@ -1,9 +1,9 @@
 import styled from '@emotion/styled'
+import Link from 'next/link'
 import { ContainedButton } from 'components/button/button'
 import { InnerWrapper, Wrapper } from 'sections/shared/shared.styles'
-import { HalfHalf } from 'sections/shared/halfHalf'
-import { ImageCarousel } from './imageCarousel'
-import { resultData } from './resultData'
+import { HalfHalf, halfHalfProps } from 'sections/shared/halfHalf'
+import { ImageCarousel, slideProp } from './imageCarousel'
 
 const SectionWrapper = styled(Wrapper)`
   background-color: #fff5f0;
@@ -26,26 +26,46 @@ const SectionDescription = styled.p`
 `
 
 const ButtonWrapper = styled.div`
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
 `
 
-export function Result() {
+type resultProps = {
+  title: string
+  description: string
+  buttonLabel: string
+  buttonLink: string
+  team: halfHalfProps
+  carousel: slideProp[]
+}
+
+export function Result({
+  title,
+  description,
+  buttonLabel,
+  buttonLink,
+  team,
+  carousel,
+}: resultProps) {
+  console.log('carousel: ', carousel)
   return (
     <SectionWrapper>
       <SectionInnerWrapper>
-        <SectionTitle>Tailored Results</SectionTitle>
-        <SectionDescription>
-          Over a half a million treatments have been performed by our highly
-          trained Registered Nurses and Doctors.
-        </SectionDescription>
-        <ImageCarousel />
+        <SectionTitle>{title}</SectionTitle>
+        <SectionDescription>{description}</SectionDescription>
+        <ImageCarousel slides={carousel} />
         <ButtonWrapper>
-          <ContainedButton>See more results</ContainedButton>
+          <Link href={buttonLink || ''}>
+            <a>
+              <ContainedButton>{buttonLabel}</ContainedButton>
+            </a>
+          </Link>
         </ButtonWrapper>
       </SectionInnerWrapper>
-      <HalfHalf {...resultData} />
+      <HalfHalf {...team} />
     </SectionWrapper>
   )
 }

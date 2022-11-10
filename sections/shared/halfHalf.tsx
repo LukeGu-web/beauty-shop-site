@@ -5,6 +5,7 @@ import Image from 'next/image'
 
 import { OutlinedButton } from 'components/button/button'
 import { InnerWrapper } from 'sections/shared/shared.styles'
+import { urlFor } from 'lib/sanity'
 import { segmentText } from './utility'
 
 const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false })
@@ -28,13 +29,19 @@ const ContentDescription = styled.p`
 
 const MediaWrapper = styled.div``
 
-type halfHalfProps = {
+export type halfHalfProps = {
   title: string
   description: string
   buttonLabel: string
   buttonLink: string
   videoSrc?: string
-  imageSrc?: string
+  imageSrc?: {
+    _type: string
+    asset: {
+      _ref: string
+      _type: string
+    }
+  }
 }
 
 export function HalfHalf({
@@ -64,8 +71,13 @@ export function HalfHalf({
             width="100%"
           />
         )}
-        {imageSrc && (
-          <Image alt={title} width={688} height={459} src={imageSrc} />
+        {Boolean(imageSrc) && (
+          <Image
+            alt={title}
+            width={688}
+            height={459}
+            src={urlFor(imageSrc).url()}
+          />
         )}
       </MediaWrapper>
     </SectionInnerWrapper>
