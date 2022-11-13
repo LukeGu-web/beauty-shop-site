@@ -16,6 +16,10 @@ const InnerWrapper = styled.div`
   grid-template-rows: 1fr;
   border: 1px solid #000;
   padding: 5%;
+  @media (max-width: 767px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+  }
 `
 
 const ContentWrapper = styled.div`

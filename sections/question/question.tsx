@@ -18,6 +18,9 @@ const FAQWrapper = styled.li`
   padding: 0.5rem;
   border-bottom: 1px solid;
   width: 70%;
+  @media (max-width: 767px) {
+    width: 100%;
+  }
 `
 
 const FAQ = styled.button`
@@ -28,6 +31,9 @@ const FAQ = styled.button`
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
+`
+const FAQQuestion = styled.h3`
+  text-align: left;
 `
 
 const FAQAnswer = styled.p`
@@ -47,7 +53,7 @@ function QuestionItem({ question, answer }: QuestionItemProps) {
   return (
     <FAQWrapper>
       <FAQ onClick={handleClick}>
-        <h3>{question}</h3>
+        <FAQQuestion>{question}</FAQQuestion>
         {open ? <RemoveCircleIcon /> : <AddCircleOutlineIcon />}
       </FAQ>
       <Collapse in={open} timeout="auto" unmountOnExit>

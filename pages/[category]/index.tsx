@@ -31,13 +31,6 @@ const ProductTemplate: NextPage = ({ categorydata, preview }: any) => {
   return (
     <PageLayout title="template" metaDescription="this is template page">
       category page
-      {/* <Hero />
-      <About />
-      <Benefit />
-      <HowItWorks />
-      <Price />
-      <Result />
-      <Question /> */}
     </PageLayout>
   )
 }
