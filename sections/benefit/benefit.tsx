@@ -15,6 +15,7 @@ export const SectionInnerWrapper = styled(InnerWrapper)`
     grid-template-rows: repeat(3, 1fr);
   }
   @media (max-width: 767px) {
+    grid-row-gap: unset;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(6, 1fr);
   }

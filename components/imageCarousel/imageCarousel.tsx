@@ -103,6 +103,23 @@ export function ImageCarousel({ slides }: { slides: slideProp[] }) {
     slidesToScroll: 3,
     nextArrow: <Arrow direction="next" />,
     prevArrow: <Arrow direction="prev" />,
+    responsive: [
+      {
+        breakpoint: 1023,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   }
   return (
     <StyledSlider {...settings}>
