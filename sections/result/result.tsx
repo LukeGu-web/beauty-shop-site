@@ -3,7 +3,10 @@ import Link from 'next/link'
 import { ContainedButton } from 'components/button/button'
 import { InnerWrapper, Wrapper } from 'sections/shared/shared.styles'
 import { HalfHalf, halfHalfProps } from 'sections/shared/halfHalf'
-import { ImageCarousel, slideProp } from './imageCarousel'
+import {
+  ImageCarousel,
+  slideProp,
+} from '../../components/imageCarousel/imageCarousel'
 
 const SectionWrapper = styled(Wrapper)`
   background-color: #fff5f0;
@@ -50,7 +53,6 @@ export function Result({
   team,
   carousel,
 }: resultProps) {
-  console.log('carousel: ', carousel)
   return (
     <SectionWrapper>
       <SectionInnerWrapper>

@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import AssistantDirectionIcon from '@mui/icons-material/AssistantDirection'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
@@ -13,14 +14,16 @@ import {
 export function Brandbar() {
   return (
     <BrandbarWrapper>
-      <LogoWrapper>
-        <Image
-          alt="Logo"
-          width={280}
-          height={180}
-          src={'https://www.laserclinics.com.au/globalassets/logo-white.svg'}
-        />
-      </LogoWrapper>
+      <Link href="/">
+        <LogoWrapper>
+          <Image
+            alt="Logo"
+            width={280}
+            height={180}
+            src={'https://www.laserclinics.com.au/globalassets/logo-white.svg'}
+          />
+        </LogoWrapper>
+      </Link>
       <FunctionWrapper>
         <StyledOption>
           <AssistantDirectionIcon />

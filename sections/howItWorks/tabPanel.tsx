@@ -1,19 +1,32 @@
 import styled from '@emotion/styled'
 import Image from 'next/image'
 
-export const TabWrapper = styled.div``
-export const ContentWrapper = styled.div`
+const TabWrapper = styled.div``
+const ContentWrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 2rem;
+  grid-row-gap: 0px;
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+  }
+`
+const Description = styled.p`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  height: 16rem;
+  overflow-y: scroll;
+`
+const ImageWrapper = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
 `
-export const Description = styled.p`
-  width: 40%;
-  height: 18rem;
-  overflow-y: scroll;
-  margin: 0 4rem;
-`
-export const ImageWrapper = styled.div``
 
 interface TabPanelProps {
   index: number
@@ -29,8 +42,8 @@ export function TabPanel(props: TabPanelProps) {
     <TabWrapper
       role="tabpanel"
       hidden={selectedId !== index}
-      id={`vertical-tabpanel-${index}`}
-      aria-labelledby={`vertical-tab-${index}`}
+      id={`tabpanel-${index}`}
+      aria-labelledby={`tab-${index}`}
     >
       {selectedId === index && (
         <ContentWrapper>
@@ -46,7 +59,7 @@ export function TabPanel(props: TabPanelProps) {
 
 export function a11yProps(index: number) {
   return {
-    id: `vertical-tab-${index}`,
-    'aria-controls': `vertical-tabpanel-${index}`,
+    id: `tab-${index}`,
+    'aria-controls': `tabpanel-${index}`,
   }
 }

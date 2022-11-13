@@ -15,6 +15,7 @@ export const SectionInnerWrapper = styled(InnerWrapper)`
     grid-template-rows: repeat(3, 1fr);
   }
   @media (max-width: 767px) {
+    grid-row-gap: unset;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(6, 1fr);
   }
@@ -40,9 +41,9 @@ export function Benefit({ title, items }: benefitProps) {
     <SectionWrapper>
       <ContentTitle>{title}</ContentTitle>
       <SectionInnerWrapper>
-        {items.map((item) => (
+        {items.map((item, index) => (
           <BenefitItem
-            key={item.title}
+            key={`${item.title}_${index}`}
             title={item.title}
             description={item.description}
             image={urlFor(item.imageSrc).url()}

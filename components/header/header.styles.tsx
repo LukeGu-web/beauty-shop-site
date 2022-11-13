@@ -14,7 +14,7 @@ export const BrandbarWrapper = styled.div`
   padding: 0 2.5rem;
 `
 
-export const LogoWrapper = styled.div`
+export const LogoWrapper = styled.a`
   display: flex;
   width: 6rem;
   cursor: pointer;

@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 import { urlFor } from 'lib/sanity'
+import useWindowSize from 'hooks/useWindowSize'
 import { InnerWrapper, Wrapper } from 'sections/shared/shared.styles'
 import { TabPanel, a11yProps } from './tabPanel'
 import { TreatmentArea, treatmentAreasProps } from './treatmentArea'
@@ -13,15 +14,21 @@ const SectionWrapper = styled(Wrapper)`
 
 const SectionInnerWrapper = styled(InnerWrapper)``
 
-const TabWrapper = styled.div`
+type TabWrapperProps = {
+  orientation: string
+}
+const TabWrapper = styled.div<TabWrapperProps>`
   display: flex;
+  flex-direction: ${(props) =>
+    props.orientation === 'horizontal' ? 'column' : 'row'};
   align-items: center;
+  padding: 1rem;
 `
 
 const Title = styled.h2``
 
 type tabItemProps = {
-  title: string
+  name: string
   description: string
   imageSrc: string
 }
@@ -33,31 +40,46 @@ type howItWorksProps = {
 }
 
 export function HowItWorks({ title, items, treatmentAreas }: howItWorksProps) {
+  const size = useWindowSize()
+
+  const tabOrientation = size.width < 767 ? 'horizontal' : 'vertical'
+
   const [selectedId, setValue] = useState(0)
 
   const handleChange = (event: SyntheticEvent, newValue: number) => {
     setValue(newValue)
   }
+
+  const styles =
+    tabOrientation === 'vertical'
+      ? {
+          borderRight: 1,
+          borderColor: 'divider',
+          marginRight: '1rem',
+        }
+      : {}
+
   return (
     <SectionWrapper>
       <SectionInnerWrapper>
         <Title>{title}</Title>
-        <TabWrapper>
+        <TabWrapper orientation={tabOrientation}>
           <Tabs
-            orientation="vertical"
+            orientation={tabOrientation}
             value={selectedId}
             onChange={handleChange}
-            aria-label="Vertical tabs"
+            aria-label="How it works tabs"
+            variant="fullWidth"
             sx={{
-              borderRight: 1,
-              borderColor: 'divider',
               overflow: 'visible',
+              ...styles,
             }}
           >
             {items.map((item, index) => (
               <Tab
                 key={`tab-${index}`}
-                label={item.title}
+                label={item.name}
+                wrapped
                 {...a11yProps(index)}
               />
             ))}

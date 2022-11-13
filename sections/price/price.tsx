@@ -14,7 +14,12 @@ const SectionInnerWrapper = styled(InnerWrapper)`
   grid-column-gap: 10%;
   margin-top: 2rem;
   margin-bottom: 2rem;
+  grid-row-gap: 2rem;
   color: #fff;
+  @media (max-width: 767px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+  }
 `
 
 const ContentWrapper = styled.div``
