@@ -1,15 +1,9 @@
 import type { NextPage } from 'next'
-import { useRouter } from 'next/router'
-import { getClient, usePreviewSubscription } from 'lib/sanity'
+import { client } from 'lib/sanity.client'
+import { PreviewSuspense } from 'next-sanity/preview'
 
-import { PageLayout } from 'components/pageLayout/pageLayout'
-import { About } from 'sections/about/about'
-import { Benefit } from 'sections/benefit/benefit'
-import { Hero } from 'sections/hero/hero'
-import { HowItWorks } from 'sections/howItWorks/howItWorks'
-import { Price } from 'sections/price/price'
-import { Question } from 'sections/question/question'
-import { Result } from 'sections/result/result'
+import { ProductTemplate } from 'components/productTemplate/productTemplate'
+import { PreviewProductPage } from 'components/previewProductPage/previewProductPage'
 
 const getQuery = (product: string) => `
   *[_type == "product" && slug.current == "/${product}"] {
@@ -26,27 +20,15 @@ const getQuery = (product: string) => `
   }
 `
 
-const ProductTemplate: NextPage = ({ productdata, preview }: any) => {
-  const router = useRouter()
-  const { category, product } = router.query
-
-  const query = getQuery(product as string)
-  const { data: pd } = usePreviewSubscription(query, {
-    initialData: productdata[0],
-    enabled: preview || router.query.preview !== undefined,
-  })
-
-  return (
-    <PageLayout title={pd.name} metaDescription="this is template page">
-      <Hero {...pd.heroSection} />
-      <About {...pd.aboutSection} />
-      <Benefit {...pd.benefitSection} />
-      <HowItWorks {...pd.howItWorksSection} />
-      <Price {...pd.priceSection} />
-      <Result {...pd.resultSection} />
-      <Question questions={pd.questionSection.questions} />
-    </PageLayout>
-  )
+const ProductTemplatePage: NextPage = ({ productdata, preview }: any) => {
+  if (preview) {
+    return (
+      <PreviewSuspense fallback={<ProductTemplate data={productdata} />}>
+        <PreviewProductPage />
+      </PreviewSuspense>
+    )
+  }
+  return <ProductTemplate data={productdata} />
 }
 
 export async function getServerSideProps({
@@ -57,7 +39,11 @@ export async function getServerSideProps({
   preview: boolean
 }) {
   const query = getQuery(params.product as string)
-  const product = await getClient(preview).fetch(query)
+  if (preview) {
+    return { props: { preview } }
+  }
+
+  const product = await client.fetch(query)
 
   return {
     props: {
@@ -67,4 +53,4 @@ export async function getServerSideProps({
   }
 }
 
-export default ProductTemplate
+export default ProductTemplatePage
