@@ -1,15 +1,9 @@
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import { getClient, usePreviewSubscription } from 'lib/sanity'
+import { client } from 'lib/sanity.client'
+import { usePreview } from 'lib/sanity.preview'
 
 import { PageLayout } from 'components/pageLayout/pageLayout'
-import { About } from 'sections/about/about'
-import { Benefit } from 'sections/benefit/benefit'
-import { Hero } from 'sections/hero/hero'
-import { HowItWorks } from 'sections/howItWorks/howItWorks'
-import { Price } from 'sections/price/price'
-import { Question } from 'sections/question/question'
-import { Result } from 'sections/result/result'
 
 const getQuery = (category: string) => `
     *[_type == "category" && slug.current == "${category}"] {
@@ -23,10 +17,7 @@ const ProductTemplate: NextPage = ({ categorydata, preview }: any) => {
   const { category } = router.query
 
   const query = getQuery(category as string)
-  const { data: pd } = usePreviewSubscription(query, {
-    initialData: categorydata,
-    enabled: preview || router.query.preview !== undefined,
-  })
+  const pd = usePreview(null, query)
 
   return (
     <PageLayout title="template" metaDescription="this is template page">
@@ -43,7 +34,11 @@ export async function getServerSideProps({
   preview: boolean
 }) {
   const query = getQuery(params.category as string)
-  const category = await getClient(preview).fetch(query)
+  if (preview) {
+    return { props: { preview } }
+  }
+
+  const category = await client.fetch(query)
 
   return {
     props: {
