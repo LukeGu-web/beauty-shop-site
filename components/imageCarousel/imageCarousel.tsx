@@ -123,7 +123,8 @@ export function ImageCarousel({ slides }: { slides: slideProp[] }) {
   }
   return (
     <StyledSlider {...settings}>
-      {slides.length > 0 &&
+      {slides &&
+        slides.length > 0 &&
         slides.map((item, index) => (
           <SlideItem key={`${item.name}-${index}`} {...item} />
         ))}

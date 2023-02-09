@@ -86,19 +86,20 @@ export function Price({ content, lists }: priceProps) {
   return (
     <SectionWrapper>
       <SectionInnerWrapper>
-        <ContentWrapper>
-          <ContentTitle>{content.title}</ContentTitle>
-          <ContentDescription>{content.description}</ContentDescription>
-          <Link href={content.buttonLink || ''}>
-            <a>
-              <ContainedButton>{content.buttonLabel}</ContainedButton>
-            </a>
-          </Link>
-        </ContentWrapper>
+        {content && (
+          <ContentWrapper>
+            <ContentTitle>{content.title}</ContentTitle>
+            <ContentDescription>{content.description}</ContentDescription>
+            <Link href={content.buttonLink || ''}>
+              <a>
+                <ContainedButton>{content.buttonLabel}</ContainedButton>
+              </a>
+            </Link>
+          </ContentWrapper>
+        )}
         <div>
-          {lists.map((item) => (
-            <PriceList key={item.name} {...item} />
-          ))}
+          {lists &&
+            lists.map((item) => <PriceList key={item.name} {...item} />)}
         </div>
       </SectionInnerWrapper>
     </SectionWrapper>

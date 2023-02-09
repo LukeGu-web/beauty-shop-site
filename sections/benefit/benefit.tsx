@@ -41,14 +41,15 @@ export function Benefit({ title, items }: benefitProps) {
     <SectionWrapper>
       <ContentTitle>{title}</ContentTitle>
       <SectionInnerWrapper>
-        {items.map((item, index) => (
-          <BenefitItem
-            key={`${item.title}_${index}`}
-            title={item.title}
-            description={item.description}
-            image={urlFor(item.imageSrc).url()}
-          />
-        ))}
+        {items &&
+          items.map((item, index) => (
+            <BenefitItem
+              key={`${item.title}_${index}`}
+              title={item.title}
+              description={item.description}
+              image={urlFor(item.imageSrc).url()}
+            />
+          ))}
       </SectionInnerWrapper>
     </SectionWrapper>
   )

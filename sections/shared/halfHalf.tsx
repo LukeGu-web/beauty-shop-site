@@ -61,7 +61,9 @@ export function HalfHalf({
     <SectionInnerWrapper>
       <ContentWrapper>
         <ContentTitle>{title}</ContentTitle>
-        <ContentDescription>{segmentText(description)}</ContentDescription>
+        {description && (
+          <ContentDescription>{segmentText(description)}</ContentDescription>
+        )}
         <Link href={buttonLink || ''}>
           <a>
             <OutlinedButton>{buttonLabel}</OutlinedButton>
