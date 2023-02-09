@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Toolbar } from '@mui/material'
-import { client } from 'lib/sanity'
+import { client } from 'lib/sanity.client'
 import NavItem from './navItem'
 import { ItemInnerWrapper, ItemsWrapper } from './navbar.styles'
 import { BlockItem, BlockItemInterface } from './blockItem'

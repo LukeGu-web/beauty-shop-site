@@ -57,7 +57,7 @@ function QuestionItem({ question, answer }: QuestionItemProps) {
         {open ? <RemoveCircleIcon /> : <AddCircleOutlineIcon />}
       </FAQ>
       <Collapse in={open} timeout="auto" unmountOnExit>
-        <FAQAnswer>{segmentText(answer)}</FAQAnswer>
+        {answer && <FAQAnswer>{segmentText(answer)}</FAQAnswer>}
       </Collapse>
     </FAQWrapper>
   )
@@ -69,7 +69,8 @@ export function Question({ questions }: { questions: QuestionItemProps[] }) {
       <SectionInnerWrapper>
         <Title>Frequently Asked Questions</Title>
         <ul style={{ padding: 0 }}>
-          {questions.length > 0 &&
+          {questions &&
+            questions.length > 0 &&
             questions.map((item, index) => (
               <QuestionItem key={index} {...item} />
             ))}

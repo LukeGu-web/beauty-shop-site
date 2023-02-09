@@ -18,7 +18,7 @@ const getQuery = (product: string) => `
   }
 `
 
-export const PreviewProductPage = ({ productdata, preview }: any) => {
+const PreviewProductPage = ({ productdata, preview }: any) => {
   const router = useRouter()
   const { category, product } = router.query
 
@@ -27,3 +27,5 @@ export const PreviewProductPage = ({ productdata, preview }: any) => {
 
   return <ProductTemplate data={pd} />
 }
+
+export default PreviewProductPage

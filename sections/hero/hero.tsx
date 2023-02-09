@@ -53,13 +53,15 @@ export function Hero({
         </ContentWrapper>
       </SectionInnerWrapper>
       <ImageWrapper>
-        <Image
-          alt="Hero image"
-          width={733}
-          height={550}
-          layout="intrinsic"
-          src={urlFor(imageSrc).url()}
-        />
+        {imageSrc && (
+          <Image
+            alt="Hero image"
+            width={733}
+            height={550}
+            layout="intrinsic"
+            src={urlFor(imageSrc).url()}
+          />
+        )}
       </ImageWrapper>
     </SectionWrapper>
   )

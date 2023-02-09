@@ -75,24 +75,26 @@ export function HowItWorks({ title, items, treatmentAreas }: howItWorksProps) {
               ...styles,
             }}
           >
-            {items.map((item, index) => (
-              <Tab
+            {items &&
+              items.map((item, index) => (
+                <Tab
+                  key={`tab-${index}`}
+                  label={item.name}
+                  wrapped
+                  {...a11yProps(index)}
+                />
+              ))}
+          </Tabs>
+          {items &&
+            items.map((item, index) => (
+              <TabPanel
                 key={`tab-${index}`}
-                label={item.name}
-                wrapped
-                {...a11yProps(index)}
+                selectedId={selectedId}
+                index={index}
+                description={item.description}
+                image={urlFor(item.imageSrc).url()}
               />
             ))}
-          </Tabs>
-          {items.map((item, index) => (
-            <TabPanel
-              key={`tab-${index}`}
-              selectedId={selectedId}
-              index={index}
-              description={item.description}
-              image={urlFor(item.imageSrc).url()}
-            />
-          ))}
         </TabWrapper>
         <TreatmentArea {...treatmentAreas} />
       </SectionInnerWrapper>

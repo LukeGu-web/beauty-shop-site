@@ -57,12 +57,14 @@ export function TreatmentArea({
           <ContentDescription>{description}</ContentDescription>
         </ContentWrapper>
         <ImageWrapper>
-          <Image
-            alt="treatment area image"
-            width={480}
-            height={695}
-            src={urlFor(imageSrc).url()}
-          />
+          {imageSrc && (
+            <Image
+              alt="treatment area image"
+              width={480}
+              height={695}
+              src={urlFor(imageSrc).url()}
+            />
+          )}
         </ImageWrapper>
       </InnerWrapper>
     </Wrapper>
