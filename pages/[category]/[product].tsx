@@ -3,7 +3,7 @@ import { client } from 'lib/sanity.client'
 import { PreviewSuspense } from 'next-sanity/preview'
 
 import { ProductTemplate } from 'components/productTemplate/productTemplate'
-import { PreviewProductPage } from 'components/previewProductPage/previewProductPage'
+import PreviewProductPage from 'components/previewProductPage/previewProductPage'
 
 const getQuery = (product: string) => `
   *[_type == "product" && slug.current == "/${product}"] {
@@ -42,12 +42,11 @@ export async function getServerSideProps({
   if (preview) {
     return { props: { preview } }
   }
-
   const product = await client.fetch(query)
 
   return {
     props: {
-      productdata: product,
+      productdata: product[0],
       preview,
     },
   }

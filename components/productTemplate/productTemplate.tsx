@@ -7,7 +7,7 @@ import { Price } from 'sections/price/price'
 import { Question } from 'sections/question/question'
 import { Result } from 'sections/result/result'
 
-export const ProductTemplate = (data: any) => (
+export const ProductTemplate = ({ data }: any) => (
   <PageLayout title={data.name} metaDescription="this is template page">
     <Hero {...data.heroSection} />
     <About {...data.aboutSection} />
